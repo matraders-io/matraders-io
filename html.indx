@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.A.TRADERS — Electrical, Sanitary, Hardware & Solar Products</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#0284c7',
+                        accent: '#f59e0b',
+                        whatsapp: '#25D366'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-primary text-white text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span><i class="fa-solid fa-location-dot mr-1">="text-accent"></i> Primary Service Area: Lahore, Pakistan</span>
+            <div class="flex space-x-4">
+                <a href="https://wa.me/923000000000" target="_blank" class="hover:underline flex items-center"><i class="fa-brands fa-whatsapp mr-1 text-whatsapp"></i> +92 300 0000000</a>
+                <span class="hidden sm:inline">|</span>
+                <span class="hidden sm:inline"><i class="fa-regular fa-clock mr-1 text-accent"></i> Mon - Sat: 9:00 AM - 8:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="#" onclick="showSection('home')" class="flex items-center space-x-2">
+                <div class="bg-primary text-white font-black text-xl px-3 py-1 rounded">M.A</div>
+                <div class="leading-tight">
+                    <span class="font-bold text-lg text-primary block tracking-wide">TRADERS</span>
+                    <span class="text-[10px] text-gray-500 uppercase block tracking-wider">Electrical • Sanitary • Solar</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-lg hidden md:block">
+                <div class="relative">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search LED, Inverters, Taps, Switches, SKU..." 
+                        class="w-full pl-10 pr-4 py-2 border rounded-full text-sm focus:outline-none focus:border-secondary">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-5">
+                <button onclick="showSection('wishlist')" class="relative text-gray-600 hover:text-primary">
+                    <i class="fa-regular fa-heart text-xl"></i>
+                    <span id="wishlistCount" class="absolute -top-2 -right-2 bg-accent text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+                <button onclick="toggleCartModal()" class="relative text-gray-600 hover:text-primary">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-secondary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+                <button onclick="toggleAdminPanel()" class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-gray-200">
+                    <i class="fa-solid fa-user-gear mr-1"></i> Admin Panel
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-gray-100 border-t border-b border-gray-200 text-sm">
+            <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto whitespace-nowrap space-x-6 py-2.5">
+                <button onclick="filterCategory('All')" class="font-semibold text-primary hover:text-secondary">All Products</button>
+                <button onclick="filterCategory('Electrical')" class="text-gray-700 hover:text-primary">Electrical</button>
+                <button onclick="filterCategory('Sanitary')" class="text-gray-700 hover:text-primary">Sanitary</button>
+                <button onclick="filterCategory('Hardware')" class="text-gray-700 hover:text-primary">Hardware</button>
+                <button onclick="filterCategory('Solar')" class="text-gray-700 hover:text-primary">Solar</button>
+                <button onclick="showSection('about')" class="text-gray-700 hover:text-primary">About Us</button>
+                <button onclick="showSection('contact')" class="text-gray-700 hover:text-primary">Contact Us</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+
+        <!-- SECTION: HOMEPAGE / SHOP -->
+        <section id="shopSection">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-6 sm:p-10 text-white mb-8 shadow-lg relative overflow-hidden">
+                <div class="max-w-xl relative z-10">
+                    <span class="bg-accent/20 text-accent font-semibold text-xs px-3 py-1 rounded-full border border-accent/30 inline-block mb-3">M.A.TRADERS Lahore</span>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold mb-3 leading-tight">Electrical, Sanitary, Hardware & Solar Products</h1>
+                    <p class="text-blue-100 text-sm sm:text-base mb-6">Quality products, competitive wholesale prices, and reliable delivery across Lahore.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#productsAnchor" class="bg-accent hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-lg text-sm transition">Shop Now</a>
+                        <a href="https://wa.me/923000000000?text=Hi%20M.A.TRADERS,%20I%20have%20an%20inquiry%20about%20your%20products." target="_blank" class="bg-whatsapp hover:opacity-90 text-white font-bold px-6 py-2.5 rounded-lg text-sm flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Direct
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productsAnchor" class="flex flex-col md:flex-row gap-6">
+                <!-- Filters Sidebar -->
+                <aside class="w-full md:w-64 bg-white p-4 rounded-xl shadow-sm border h-fit">
+                    <h3 class="font-bold text-gray-800 text-base mb-4 pb-2 border-b flex justify-between items-center">
+                        <span>Filters</span>
+                        <button onclick="resetFilters()" class="text-xs text-secondary hover:underline font-normal">Reset</button>
+                    </h3>
+
+                    <!-- Categories -->
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Category</label>
+                        <select id="categoryFilter" onchange="applyFilters()" class="w-full border rounded-lg p-2 text-sm bg-gray-50">
+                            <option value="All">All Categories</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Sanitary">Sanitary</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Solar">Solar</option>
+                        </select>
+                    </div>
+
+                    <!-- Max Price -->
+                    <div class="mb-5">
+                        <div class="flex justify-between text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">
+                            <span>Max Price</span>
+                            <span id="priceValue" class="text-primary font-bold">Rs. 250,000</span>
+                        </div>
+                        <input type="range" id="priceRange" min="100" max="250000" step="500" value="250000" oninput="applyFilters()" class="w-full accent-primary">
+                    </div>
+
+                    <!-- Sort -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Sort By</label>
+                        <select id="sortOrder" onchange="applyFilters()" class="w-full border rounded-lg p-2 text-sm bg-gray-50">
+                            <option value="default">Recommended</option>
+                            <option value="low-high">Price: Low to High</option>
+                            <option value="high-low">Price: High to Low</option>
+                            <option value="name">Name A-Z</option>
+                        </select>
+                    </div>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800" id="catalogTitle">All Products</h2>
+                        <span class="text-xs text-gray-500" id="productCount">Showing 0 products</span>
+                    </div>
+
+                    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Products rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PRODUCT DETAIL MODAL/VIEW -->
+        <section id="productDetailSection" class="hidden bg-white p-6 rounded-2xl shadow-sm border max-w-4xl mx-auto">
+            <button onclick="showSection('home')" class="text-sm text-secondary font-semibold mb-4 inline-flex items-center gap-1">
+                <i class="fa-solid fa-arrow-left"></i> Back to Shop
+            </button>
+            <div id="productDetailContainer"></div>
+        </section>
+
+        <!-- SECTION: ABOUT US -->
+        <section id="aboutSection" class="hidden bg-white p-8 rounded-2xl shadow-sm border max-w-4xl mx-auto">
+            <h1 class="text-2xl font-bold text-primary mb-4">About M.A.TRADERS</h1>
+            <p class="text-gray-600 leading-relaxed mb-4">M.A.TRADERS is a premier supplier of high-quality Electrical, Sanitary, Hardware, and Solar products based in Lahore, Pakistan. We cater to residential, commercial, and industrial requirements with competitive pricing and dependable service.</p>
+            <h3 class="font-bold text-lg text-gray-800 mt-6 mb-2">Our Core Product Ranges:</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                <li><strong>Electrical:</strong> LED lighting, switches, breakers, cables, distribution boards, and fans.</li>
+                <li><strong>Sanitary:</strong> Faucets, showers, wash basins, PPRC/PVC pipes, fittings, and valves.</li>
+                <li><strong>Hardware:</strong> Hand tools, power tool accessories, locks, hinges, and construction materials.</li>
+                <li><strong>Solar:</strong> Hybrid inverters, Tier-1 solar panels, solar batteries, cables, and protection gear.</li>
+            </ul>
+        </section>
+
+        <!-- SECTION: CONTACT US -->
+        <section id="contactSection" class="hidden bg-white p-8 rounded-2xl shadow-sm border max-w-4xl mx-auto">
+            <h1 class="text-2xl font-bold text-primary mb-6">Contact M.A.TRADERS</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3">Store Details</h3>
+                    <p class="text-sm text-gray-600 mb-2"><strong>Location:</strong> Main Hardware Market, Lahore, Pakistan</p>
+                    <p class="text-sm text-gray-600 mb-2"><strong>Phone:</strong> +92 300 0000000</p>
+                    <p class="text-sm text-gray-600 mb-2"><strong>WhatsApp:</strong> +92 300 0000000</p>
+                    <p class="text-sm text-gray-600 mb-2"><strong>Hours:</strong> Monday – Saturday: 9:00 AM – 8:00 PM</p>
+                    <a href="https://wa.me/923000000000" target="_blank" class="mt-4 inline-flex items-center gap-2 bg-whatsapp text-white font-bold px-4 py-2 rounded-lg text-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Direct WhatsApp Chat
+                    </a>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-3">Send Us a Message</h3>
+                    <form onsubmit="alert('Message sent successfully!'); return false;" class="space-y-3">
+                        <input type="text" placeholder="Your Name" required class="w-full border rounded-lg p-2 text-sm">
+                        <input type="tel" placeholder="Phone Number" required class="w-full border rounded-lg p-2 text-sm">
+                        <textarea placeholder="Your Requirement / Message" rows="4" required class="w-full border rounded-lg p-2 text-sm"></textarea>
+                        <button type="submit" class="bg-primary text-white font-bold px-5 py-2 rounded-lg text-sm hover:bg-blue-900">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: WISHLIST -->
+        <section id="wishlistSection" class="hidden bg-white p-6 rounded-2xl shadow-sm border max-w-4xl mx-auto">
+            <h1 class="text-xl font-bold text-gray-800 mb-4">My Wishlist</h1>
+            <div id="wishlistGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </section>
+    </main>
+
+    <!-- SHOPPING CART MODAL -->
+    <div id="cartModal" class="fixed inset-0 bg-black/50 z-50 hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full flex flex-col justify-between p-6 shadow-2xl overflow-y-auto">
+            <div>
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <h2 class="text-lg font-bold text-gray-800"><i class="fa-solid fa-cart-shopping mr-2 text-primary"></i> Shopping Cart</h2>
+                    <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                <div id="cartItemsContainer" class="divide-y my-4"></div>
+            </div>
+
+            <div class="border-t pt-4">
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span id="cartSubtotal" class="font-semibold">Rs. 0</span>
+                </div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-600">Estimated Lahore Delivery</span>
+                    <span id="cartDelivery" class="font-semibold">Rs. 250</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-gray-800 my-2">
+                    <span>Total</span>
+                    <span id="cartTotal" class="text-primary">Rs. 0</span>
+                </div>
+                
+                <!-- CHECKOUT FORM -->
+                <div class="mt-4 space-y-2">
+                    <input type="text" id="custName" placeholder="Full Name *" class="w-full border rounded p-2 text-xs">
+                    <input type="tel" id="custPhone" placeholder="WhatsApp / Phone Number *" class="w-full border rounded p-2 text-xs">
+                    <textarea id="custAddress" placeholder="Delivery Address in Lahore *" rows="2" class="w-full border rounded p-2 text-xs"></textarea>
+                    
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-whatsapp text-white font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 hover:opacity-95">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Complete Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl rounded-2xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center pb-4 border-b">
+                <h2 class="text-lg font-bold text-primary"><i class="fa-solid fa-sliders mr-2"></i> M.A.TRADERS Admin Dashboard</h2>
+                <button onclick="toggleAdminPanel()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div class="mt-4">
+                <h3 class="font-bold text-sm text-gray-700 mb-3">Add New Product</h3>
+                <form onsubmit="adminAddProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <input type="text" id="adminTitle" placeholder="Product Title *" required class="border p-2 rounded">
+                    <input type="text" id="adminSKU" placeholder="SKU Code (e.g. ELE-003)" required class="border p-2 rounded">
+                    <select id="adminCategory" required class="border p-2 rounded">
+                        <option value="Electrical">Electrical</option>
+                        <option value="Sanitary">Sanitary</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Solar">Solar</option>
+                    </select>
+                    <input type="number" id="adminPrice" placeholder="Price (PKR) *" required class="border p-2 rounded">
+                    <input type="number" id="adminStock" placeholder="Stock Quantity *" required class="border p-2 rounded">
+                    <input type="url" id="adminImage" placeholder="Image URL (Unsplash / Direct Link)" class="border p-2 rounded">
+                    <textarea id="adminDesc" placeholder="Product Description..." class="border p-2 rounded sm:col-span-2" rows="2"></textarea>
+                    <button type="submit" class="bg-primary text-white font-bold py-2 rounded sm:col-span-2 text-sm hover:bg-blue-900">Add Product to Inventory</button>
+                </form>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="font-bold text-sm text-gray-700 mb-3">Inventory Quick View</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border">
+                        <thead class="bg-gray-100 border-b">
+                            <tr>
+                                <th class="p-2">SKU</th>
+                                <th class="p-2">Product Name</th>
+                                <th class="p-2">Category</th>
+                                <th class="p-2">Price</th>
+                                <th class="p-2">Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 text-xs py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">M.A.TRADERS</h4>
+                <p>Leading supplier of Electrical, Sanitary, Hardware, and Solar equipment in Lahore, Pakistan.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Product Categories</h4>
+                <ul class="space-y-1">
+                    <li><a href="#" onclick="filterCategory('Electrical')">Electrical Supplies</a></li>
+                    <li><a href="#" onclick="filterCategory('Sanitary')">Sanitary Fittings</a></li>
+                    <li><a href="#" onclick="filterCategory('Hardware')">Hardware & Tools</a></li>
+                    <li><a href="#" onclick="filterCategory('Solar')">Solar Solutions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Customer Service</h4>
+                <ul class="space-y-1">
+                    <li><a href="#" onclick="showSection('contact')">Contact Support</a></li>
+                    <li><a href="#">Delivery & Shipping Policy</a></li>
+                    <li><a href="#">Return & Refund Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Contact Lahore Office</h4>
+                <p class="mb-1"><i class="fa-brands fa-whatsapp text-whatsapp mr-1"></i> +92 300 0000000</p>
+                <p class="mb-1"><i class="fa-solid fa-envelope mr-1"></i> info@matraders.pk</p>
+                <p><i class="fa-solid fa-location-dot mr-1"></i> Lahore, Punjab, Pakistan</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 border-t border-gray-800 mt-6 pt-4 text-center">
+            &copy; 2026 M.A.TRADERS. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- APPLICATION LOGIC JS -->
+    <script>
+        // DEFAULT PRODUCT DATABASE
+        let products = [
+            { id: 1, title: 'Inverex Nitrox 6KW Hybrid Solar Inverter', sku: 'SOL-INV-001', category: 'Solar', price: 215000, stock: 8, image: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?w=500', desc: '6KW Dual MPPT Hybrid Solar Inverter with Wi-Fi monitoring and IP65 protection.' },
+            { id: 2, title: 'Jinko 575W N-Type Mono Solar Panel', sku: 'SOL-PNL-002', category: 'Solar', price: 24500, stock: 45, image: 'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=500', desc: 'High efficiency Tier-1 solar panel engineered for heat tolerance.' },
+            { id: 3, title: 'Philips 12W LED Bulb (Cool Day Light)', sku: 'ELE-LED-001', category: 'Electrical', price: 450, stock: 120, image: 'https://images.unsplash.com/photo-1550985616-10810253b84d?w=500', desc: 'Energy saving B22 mount LED bulb with 10,000 hours operational lifespan.' },
+            { id: 4, title: 'Schneider 32A Double Pole Circuit Breaker', sku: 'ELE-BRK-004', category: 'Electrical', price: 1850, stock: 35, image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500', desc: 'Heavy duty electrical protection breaker for residential DB boards.' },
+            { id: 5, title: 'Master Single Lever Kitchen Sink Mixer Tap', sku: 'SAN-TAP-011', category: 'Sanitary', price: 6800, stock: 14, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500', desc: 'Chrome plated brass body kitchen tap with 360-degree swivel spout.' },
+            { id: 6, title: 'Total 101-Piece Hand Tool Set', sku: 'HRD-TLS-088', category: 'Hardware', price: 9500, stock: 10, image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=500', desc: 'Complete toolkit including hammers, pliers, wrenches, and screwdriver bits.' }
+        ];
+
+        let cart = [];
+        let wishlist = [];
+
+        // RENDER PRODUCT CATALOG
+        function renderProducts(itemsToRender) {
+            const grid = document.getElementById('productGrid');
+            const countEl = document.getElementById('productCount');
+            grid.innerHTML = '';
+            countEl.innerText = `Showing ${itemsToRender.length} products`;
+
+            if (itemsToRender.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500">No products match your criteria.</div>`;
+                return;
+            }
+
+            itemsToRender.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-44 bg-gray-100">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover">
+                            <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-white/80 p-2 rounded-full text-gray-600 hover:text-red-500 transition">
+                                <i class="${wishlist.includes(p.id) ? 'fa-solid' : 'fa-regular'} fa-heart${wishlist.includes(p.id) ? 'text-red-500' : ''}"></i>
+                            </button>
+                            <span class="absolute bottom-2 left-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded">${p.category}</span>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">SKU: ${p.sku}</span>
+                            <h3 class="font-bold text-gray-800 text-sm mt-1 cursor-pointer hover:text-secondary line-clamp-2" onclick="openProductDetail(${p.id})">${p.title}</h3>
+                            <div class="mt-2 text-xs text-gray-500">Stock: <span class="${p.stock > 0 ? 'text-green-600 font-semibold' : 'text-red-600'}">${p.stock > 0 ? p.stock + ' units' : 'Out of Stock'}</span></div>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <div class="text-base font-extrabold text-primary mb-3">Rs. ${p.price.toLocaleString()}</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="addToCart(${p.id})" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded-lg text-xs flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                            <a href="https://wa.me/923000000000?text=Hi%20M.A.TRADERS,%20I%20am%20interested%20in%20${encodeURIComponent(p.title)}\%20(SKU:\%20${p.sku})" target="_blank" class="bg-whatsapp hover:opacity-90 text-white font-bold py-2 rounded-lg text-xs flex items-center justify-center gap-1">
+                                <i class="fa-brands fa-whatsapp"></i> Inquiry
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // FILTER & SEARCH HANDLERS
+        function applyFilters() {
+            const cat = document.getElementById('categoryFilter').value;
+            const maxPrice = parseFloat(document.getElementById('priceRange').value);
+            const sort = document.getElementById('sortOrder').value;
+            document.getElementById('priceValue').innerText = `Rs. ${maxPrice.toLocaleString()}`;
+
+            let filtered = products.filter(p => {
+                const matchCategory = (cat === 'All' || p.category === cat);
+                const matchPrice = (p.price <= maxPrice);
+                return matchCategory && matchPrice;
+            });
+
+            if (sort === 'low-high') filtered.sort((a,b) => a.price - b.price);
+            if (sort === 'high-low') filtered.sort((a,b) => b.price - a.price);
+            if (sort === 'name') filtered.sort((a,b) => a.title.localeCompare(b.title));
+
+            renderProducts(filtered);
+        }
+
+        function filterCategory(catName) {
+            showSection('home');
+            document.getElementById('categoryFilter').value = catName;
+            document.getElementById('catalogTitle').innerText = `${catName} Products`;
+            applyFilters();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.sku.toLowerCase().includes(query) ||
+                p.category.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('categoryFilter').value = 'All';
+            document.getElementById('priceRange').value = 250000;
+            document.getElementById('sortOrder').value = 'default';
+            document.getElementById('catalogTitle').innerText = 'All Products';
+            applyFilters();
+        }
+
+        // NAVIGATION VIEW SWITCHER
+        function showSection(secId) {
+            ['shopSection', 'productDetailSection', 'aboutSection', 'contactSection', 'wishlistSection'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            if (secId === 'home') document.getElementById('shopSection').classList.remove('hidden');
+            if (secId === 'about') document.getElementById('aboutSection').classList.remove('hidden');
+            if (secId === 'contact') document.getElementById('contactSection').classList.remove('hidden');
+            if (secId === 'wishlist') {
+                document.getElementById('wishlistSection').classList.remove('hidden');
+                renderWishlist();
+            }
+        }
+
+        // PRODUCT DETAIL PAGE
+        function openProductDetail(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return;
+            const container = document.getElementById('productDetailContainer');
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <img src="${p.image}" alt="${p.title}" class="w-full h-80 object-cover rounded-xl border">
+                    <div>
+                        <span class="text-xs font-bold text-secondary uppercase tracking-wider">${p.category}</span>
+                        <h1 class="text-2xl font-bold text-gray-800 mt-1 mb-2">${p.title}</h1>
+                        <p class="text-xs text-gray-400 mb-4">SKU Code: ${p.sku}</p>
+                        <div class="text-2xl font-black text-primary mb-4">Rs. ${p.price.toLocaleString()}</div>
+                        <p class="text-sm text-gray-600 mb-6 leading-relaxed">${p.desc}</p>
+                        
+                        <div class="space-y-3">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-3 rounded-xl text-sm transition">Add To Cart</button>
+                            <a href="https://wa.me/923000000000?text=Hi%20M.A.TRADERS,%20I%20want%20to%20order%20${encodeURIComponent(p.title)}\%20(SKU:\%20${p.sku})" target="_blank" class="w-full bg-whatsapp text-white font-bold py-3 rounded-xl text-sm flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Order Directly via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showSection('detail');
+            document.getElementById('productDetailSection').classList.remove('hidden');
+        }
+
+        // CART MANAGEMENT
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            toggleCartModal(true);
+        }
+
+        function updateCartQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = '';
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                const div = document.createElement('div');
+                div.className = 'py-3 flex justify-between items-center';
+                div.innerHTML = `
+                    <div class="flex-1 pr-2">
+                        <h4 class="text-xs font-bold text-gray-800">${item.title}</h4>
+                        <span class="text-xs text-gray-500">Rs. ${item.price.toLocaleString()} x${item.qty}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="updateCartQty(${item.id}, -1)" class="w-6 h-6 border rounded bg-gray-100 font-bold text-xs">-</button>
+                        <span class="text-xs font-bold">${item.qty}</span>
+                        <button onclick="updateCartQty(${item.id}, 1)" class="w-6 h-6 border rounded bg-gray-100 font-bold text-xs">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            const delivery = cart.length > 0 ? 250 : 0;
+            document.getElementById('cartSubtotal').innerText = `Rs. ${subtotal.toLocaleString()}`;
+            document.getElementById('cartDelivery').innerText = `Rs. ${delivery.toLocaleString()}`;
+            document.getElementById('cartTotal').innerText = `Rs. ${(subtotal + delivery).toLocaleString()}`;
+        }
+
+        function toggleCartModal(openForce = false) {
+            const modal = document.getElementById('cartModal');
+            if (openForce) modal.classList.remove('hidden');
+            else modal.classList.toggle('hidden');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert('Your cart is empty!');
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) return alert('Please fill in your name, phone, and delivery address.');
+
+            let msg = `*NEW ORDER - M.A.TRADERS*\n\n`;
+            msg += `*Customer:* ${name}\n*Phone:* ${phone}\n*Address:*${address}, Lahore\n\n*Order Items:*\n`;
+
+            let total = 0;
+            cart.forEach((i, idx) => {
+                const itemTotal = i.price * i.qty;
+                total += itemTotal;
+                msg += `${idx + 1}.${i.title} (SKU: ${i.sku}) - Qty:${i.qty} x Rs.${i.price} = Rs.${itemTotal}\n`;
+            });
+
+            msg += `\n*Subtotal:* Rs. ${total}`;
+            msg += `\n*Delivery Charges (Lahore):* Rs. 250`;
+            msg += `\n*Grand Total:* Rs. ${total + 250}`;
+
+            const url = `https://wa.me/923000000000?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // WISHLIST MANAGEMENT
+        function toggleWishlist(id) {
+            if (wishlist.includes(id)) {
+                wishlist = wishlist.filter(item => item !== id);
+            } else {
+                wishlist.push(id);
+            }
+            document.getElementById('wishlistCount').innerText = wishlist.length;
+            applyFilters();
+        }
+
+        function renderWishlist() {
+            const grid = document.getElementById('wishlistGrid');
+            grid.innerHTML = '';
+            const wishItems = products.filter(p => wishlist.includes(p.id));
+
+            if (wishItems.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-gray-500 text-sm">No items in your wishlist yet.</p>`;
+                return;
+            }
+
+            wishItems.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'border rounded-xl p-3 bg-white flex flex-col justify-between';
+                div.innerHTML = `
+                    <div>
+                        <img src="${p.image}" class="w-full h-32 object-cover rounded-lg mb-2">
+                        <h4 class="font-bold text-xs line-clamp-1">${p.title}</h4>
+                        <div class="text-xs font-bold text-primary mt-1">Rs. ${p.price.toLocaleString()}</div>
+                    </div>
+                    <button onclick="addToCart(${p.id})" class="mt-3 bg-primary text-white text-xs font-bold py-1.5 rounded-lg">Move to Cart</button>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // ADMIN PANEL LOGIC
+        function toggleAdminPanel() {
+            document.getElementById('adminModal').classList.toggle('hidden');
+            renderAdminTable();
+        }
+
+        function adminAddProduct(e) {
+            e.preventDefault();
+            const newP = {
+                id: products.length + 1,
+                title: document.getElementById('adminTitle').value,
+                sku: document.getElementById('adminSKU').value,
+                category: document.getElementById('adminCategory').value,
+                price: parseFloat(document.getElementById('adminPrice').value),
+                stock: parseInt(document.getElementById('adminStock').value),
+                image: document.getElementById('adminImage').value || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500',
+                desc: document.getElementById('adminDesc').value
+            };
+            products.unshift(newP);
+            applyFilters();
+            renderAdminTable();
+            e.target.reset();
+            alert('Product added successfully!');
+        }
+
+        function renderAdminTable() {
+            const body = document.getElementById('adminTableBody');
+            body.innerHTML = '';
+            products.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-2 font-mono">${p.sku}</td>
+                    <td class="p-2 font-bold">${p.title}</td>
+                    <td class="p-2">${p.category}</td>
+                    <td class="p-2">Rs. ${p.price.toLocaleString()}</td>
+                    <td class="p-2">${p.stock}</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        // INITIAL LOAD
+        renderProducts(products);
+    </script>
+</body>
+</html>
